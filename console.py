@@ -135,12 +135,12 @@ class HBNBCommand(cmd.Cmd):
                 if value[0] == "\"" and value[-1] == "\"":
                     value = value[1:-1]
                     value = value.replace("_", " ")
-                    
-                elif key in HBNBCommand.types:
+
+                if key in HBNBCommand.types:
                     value = HBNBCommand.types[key](value)
 
                 setattr(new_instance, key, value)
-        
+
         storage.save()
         print(new_instance.id)
 

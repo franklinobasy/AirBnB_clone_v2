@@ -37,25 +37,35 @@ class TestHBNBCommand_create(unittest.TestCase):
             os.rename("tmp", "file.json")
         except IOError:
             pass
-    
+
     def test_create_object_params(self):
         with patch("sys.stdout", new=StringIO()) as output:
-            self.assertFalse(HBNBCommand().onecmd("create State name=\"California\""))
+            self.assertFalse(HBNBCommand().onecmd(
+                "create State name=\"California\""
+                )
+            )
             self.assertLess(0, len(output.getvalue().strip()))
             testKey = "State.{}".format(output.getvalue().strip())
             self.assertIn(testKey, storage.all().keys())
             self.assertEqual("California", storage.all()[testKey].name)
         with patch("sys.stdout", new=StringIO()) as output:
-            self.assertFalse(HBNBCommand().onecmd("create State name=\"Arizona\""))
+            self.assertFalse(HBNBCommand().onecmd(
+                "create State name=\"Arizona\""
+                )
+            )
             self.assertLess(0, len(output.getvalue().strip()))
             testKey = "State.{}".format(output.getvalue().strip())
             self.assertIn(testKey, storage.all().keys())
             self.assertEqual("Arizona", storage.all()[testKey].name)
         with patch("sys.stdout", new=StringIO()) as output:
-            self.assertFalse(HBNBCommand().onecmd("create Place city_id=\"0001\" \
+            self.assertFalse(HBNBCommand().onecmd(
+                "create Place city_id=\"0001\" \
                 user_id=\"0001\" name=\"My_little_house\" number_rooms=4 \
-                number_bathrooms=2 max_guest=10 price_by_night=300 latitude=37.773972 \
-                longitude=-122.431297"))
+                number_bathrooms=2 max_guest=10 \
+                price_by_night=300 latitude=37.773972 \
+                longitude=-122.431297"
+                )
+            )
             self.assertLess(0, len(output.getvalue().strip()))
             testKey = "Place.{}".format(output.getvalue().strip())
             self.assertIn(testKey, storage.all().keys())
@@ -68,5 +78,3 @@ class TestHBNBCommand_create(unittest.TestCase):
             self.assertEqual(300, storage.all()[testKey].price_by_night)
             self.assertEqual(37.773972, storage.all()[testKey].latitude)
             self.assertEqual(-122.431297, storage.all()[testKey].longitude)
-
-
