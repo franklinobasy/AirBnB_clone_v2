@@ -134,7 +134,7 @@ class HBNBCommand(cmd.Cmd):
 
                 if value[0] == "\"" and value[-1] == "\"":
                     value = value[1:-1]
-                    value = value.replace("_", " ")
+                    value = value.replace("_", " ").replace('"', '\\"')
 
                 if key in HBNBCommand.types:
                     value = HBNBCommand.types[key](value)
