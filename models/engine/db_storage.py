@@ -19,7 +19,7 @@ class DBStorage:
     """ creates a db storage engine"""
     __engine = None
     __session = None
-    classes = ["User", "State", "City", "Amenity", "Place", "Review"]
+    classes = ["State"]
 
     def __init__(self):
         """ create engine"""
@@ -36,21 +36,23 @@ class DBStorage:
         if env == "test":
             Base.metadata.drop_all(bind=self.__engine)
 
+        
     def all(self, cls=None):
         obj_dict = {}
 
         if cls:
             if isinstance(cls, str):
                 cls = eval(cls)
+                
             if cls.__name__ in DBStorage.classes:
-                query = self.__session.query(cls)
+                query = self.__session.query(cls).all()
 
                 for obj in query:
                     key = f"{type(obj).__name__}.{obj.id}"
                     obj_dict.update({key: obj})
         else:
             for cls_ in DBStorage.classes:
-                query = self.__session.query(eval(cls_))
+                query = self.__session.query(eval(cls_)).all()
 
                 for obj in query:
                     key = f"{type(obj).__name__}.{obj.id}"

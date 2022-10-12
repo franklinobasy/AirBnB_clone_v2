@@ -47,7 +47,7 @@ class BaseModel:
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 if key != "__class__":
                     setattr(self, key, value)
-
+            
         else:
             self.id = str(uuid.uuid4())
             self.created_at = self.updated_at = datetime.now()
@@ -74,7 +74,7 @@ class BaseModel:
         dictionary['updated_at'] = self.updated_at.isoformat()
         if "_sa_instance_state" in dictionary.keys():
             del dictionary["_sa_instance_state"]
-            models.storage.save()
+            # models.storage.save()   # GOD HAS DELIVERED ME FROM YOU !!!!!!
         return dictionary
 
     def delete(self):
