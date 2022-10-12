@@ -32,7 +32,7 @@ class DBStorage:
 
     def all(self, cls=None):
         obj_dict = {}
-        
+
         if cls:
             if isinstance(cls, str):
                 cls = eval(cls)
@@ -41,15 +41,15 @@ class DBStorage:
 
                 for obj in query:
                     key = f"{type(obj).__name__}.{obj.id}"
-                    obj_dict.update({key:obj})
+                    obj_dict.update({key: obj})
         else:
             for cls_ in DBStorage.classes:
                 query = self.__session.query(eval(cls_))
 
                 for obj in query:
                     key = f"{type(obj).__name__}.{obj.id}"
-                    obj_dict.update({key:obj})
-    
+                    obj_dict.update({key: obj})
+
         return obj_dict
 
     def new(self, obj):
@@ -68,4 +68,3 @@ class DBStorage:
         session_factory = sessionmaker(bind=self.__engine)
         Session = scoped_session(session_factory)
         self.__session = Session()
-
