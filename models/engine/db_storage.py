@@ -19,7 +19,7 @@ class DBStorage:
     """ creates a db storage engine"""
     __engine = None
     __session = None
-    classes = ["State"]
+    classes = ["State", "City"]
 
     def __init__(self):
         """ create engine"""
@@ -43,7 +43,7 @@ class DBStorage:
         if cls:
             if isinstance(cls, str):
                 cls = eval(cls)
-                
+
             if cls.__name__ in DBStorage.classes:
                 query = self.__session.query(cls).all()
 
