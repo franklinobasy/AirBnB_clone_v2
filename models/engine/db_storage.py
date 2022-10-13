@@ -19,7 +19,7 @@ class DBStorage:
     """ creates a db storage engine"""
     __engine = None
     __session = None
-    classes = ["State", "City"]
+    classes = ["State", "City", "User", "Place"]
 
     def __init__(self):
         """ create engine"""
@@ -36,7 +36,7 @@ class DBStorage:
         if env == "test":
             Base.metadata.drop_all(bind=self.__engine)
 
-        
+
     def all(self, cls=None):
         obj_dict = {}
 
