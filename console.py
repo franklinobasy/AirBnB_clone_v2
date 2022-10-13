@@ -143,7 +143,6 @@ class HBNBCommand(cmd.Cmd):
         new_instance.save()
         print(new_instance.id)
         storage.save()
-        
 
     def help_create(self):
         """ Help information for the create method """
@@ -222,7 +221,7 @@ class HBNBCommand(cmd.Cmd):
 
         args = args.split(" ")
 
-        objects = storage.all() #
+        objects = storage.all()
 
         if args[0] == "":
             for obj in objects.values():
