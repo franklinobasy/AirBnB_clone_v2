@@ -14,9 +14,8 @@ class FileStorage:
             return self.__objects
 
         objects = {}
-        for key, value in FileStorage.__objects.items():
-            if cls == value.__class__ or cls == value.__class__.__name__:
-                objects.update({key: value})
+        for key, value in self.__objects.items():
+            objects.update({key: value})
 
         return objects
 
