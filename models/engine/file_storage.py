@@ -61,7 +61,7 @@ class FileStorage:
         if obj:
             name = obj.__class__.__name__
             id = obj.id
-            key = ".".join([name, id])
+            key = name + '.' + id
             if key in FileStorage.__objects:
                 del FileStorage.__objects[key]
                 # self.save()
