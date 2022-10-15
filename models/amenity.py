@@ -8,5 +8,7 @@ from sqlalchemy.orm import relationship
 class Amenity(BaseModel, Base):
     """defines the amenity class"""
     __tablename__ = 'amenities'
-    name = Column(String(128), nullable=False)
-    place_amenities = relationship("Place", secondary=place_amenity)
+    if storage_type == 'db':
+        name = Column(String(128), nullable=False)
+    else:
+        name = ""
