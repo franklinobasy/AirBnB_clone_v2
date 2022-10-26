@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# automated configuration of web server for web static
 
 # check if nginx is installed
 echo "checking if nginx is installed..."
@@ -6,7 +7,7 @@ dpkg -s nginx &> /dev/null
 
 if [[ $? -ne 0  ]]
 then
-	echo "nginx not installed\nTrying to install nginx...\n"
+	echo "nginx not installed\nTrying to install nginx..."
 	sudo apt-get update;
 	sudo apt-get install -y nginx;
 fi
@@ -14,7 +15,7 @@ echo "nginx is installed"
 
 if [[ ! -d "/data" ]]
 then
-	echo "path /data does not exists\ncreating /data"
+	echo "path /data does not exists, creating /data"
 	sudo mkdir /data/
 	echo "path /data created"
 else
@@ -23,7 +24,7 @@ fi
 
 if [[ ! -d "/data/web_static/" ]]
 then
-        echo "path /data/web_static/ does not exists\ncreating /data/web_static"
+        echo "path /data/web_static/ does not exists, creating /data/web_static"
         sudo mkdir -p /data/web_static/
         echo "path /data/web_static/ created"
 else
@@ -32,7 +33,7 @@ fi
 
 if [[ ! -d "/data/web_static/releases/" ]]
 then
-        echo "path /data/web_static/releases/ does not exists\ncreating /data/web_static/releases"
+        echo "path /data/web_static/releases/ does not exists, creating /data/web_static/releases"
         sudo mkdir -p /data/web_static/releases/
         echo "path /data/web_static/releases/ created"
 else
@@ -41,7 +42,7 @@ fi
 
 if [[ ! -d "/data/web_static/shared" ]]
 then
-        echo "path /data/web_static/shared does not exists\ncreating /data/web_static/shared"
+        echo "path /data/web_static/shared does not exists, creating /data/web_static/shared"
         sudo mkdir -p /data/web_static/shared
         echo "path /data/web_static/shared created"
 else
@@ -50,7 +51,7 @@ fi
 
 if [[ ! -d "/data/web_static/releases/test" ]]
 then
-        echo "path /data/web_static/releases/ does not exists\ncreating /data/web_static/releases/test"
+        echo "path /data/web_static/releases/ does not exists, creating /data/web_static/releases/test"
         sudo mkdir -p /data/web_static/releases/test
         echo "path /data/web_static/releases/test created"
 else
