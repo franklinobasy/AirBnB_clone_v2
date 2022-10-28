@@ -7,6 +7,7 @@ import os
 env.hosts = ["3.95.133.255", "54.87.207.29"]
 env.user = "ubuntu"
 
+
 def do_pack():
     """
         Return the archive path if archive has been correctly
@@ -24,7 +25,7 @@ def do_pack():
         return None
 
 
-def do_deploy(archive_path):  
+def do_deploy(archive_path):
     """
     a Fabric script that distributes an archive to your web servers
     """
@@ -38,8 +39,7 @@ def do_deploy(archive_path):
 
     put(archive_path, "/tmp/")
     run("sudo mkdir -p {}".format(newest_version))
-    run("sudo tar -xzf {} -C {}/".format(archived_file,
-                                            newest_version))
+    run("sudo tar -xzf {} -C {}/".format(archived_file, newest_version))
     run("sudo rm {}".format(archived_file))
     run("sudo mv {}/web_static/* {}".format(newest_version,
                                             newest_version))
