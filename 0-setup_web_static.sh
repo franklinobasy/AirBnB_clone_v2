@@ -2,74 +2,75 @@
 # automated configuration of web server for web static
 
 # check if nginx is installed
-echo "checking if nginx is installed..."
-dpkg -s nginx &> /dev/null
-
-if [[ $? -ne 0  ]]
+printf "checking if nginx is installed..."
+if ! command -v nginx &> /dev/null
 then
-	echo "nginx not installed\nTrying to install nginx..."
+	printf "nginx not installed\nTrying to install nginx...\n"
 	sudo apt-get update;
 	sudo apt-get install -y nginx;
 fi
-echo "nginx is installed"
+printf "nginx is installed\n"
+printf "starting nginx...\n"
+sudo service start nginx
+printf "nginx started!.\n"
 
 if [[ ! -d "/data" ]]
 then
-	echo "path /data does not exists, creating /data"
+	printf "path /data does not exists, creating /data\n"
 	sudo mkdir /data/
-	echo "path /data created"
+	printf "path /data created\n"
 else
-	echo "path /data already exists"
+	printf "path /data already exists\n"
 fi
 
 if [[ ! -d "/data/web_static/" ]]
 then
-        echo "path /data/web_static/ does not exists, creating /data/web_static"
+        printf "path /data/web_static/ does not exists, creating /data/web_static\n"
         sudo mkdir -p /data/web_static/
-        echo "path /data/web_static/ created"
+        printf "path /data/web_static/ created\n"
 else
-        echo "path /data/web_static/ already exists"
+        printf "path /data/web_static/ already exists\n"
 fi
 
 if [[ ! -d "/data/web_static/releases/" ]]
 then
-        echo "path /data/web_static/releases/ does not exists, creating /data/web_static/releases"
+        printf "path /data/web_static/releases/ does not exists, creating /data/web_static/releases\n"
         sudo mkdir -p /data/web_static/releases/
-        echo "path /data/web_static/releases/ created"
+        printf "path /data/web_static/releases/ created\n"
 else
-        echo "path /data/web_static/releases/ already exists"
+        printf "path /data/web_static/releases/ already exists\n"
 fi
 
 if [[ ! -d "/data/web_static/shared" ]]
 then
-        echo "path /data/web_static/shared does not exists, creating /data/web_static/shared"
+        printf "path /data/web_static/shared does not exists, creating /data/web_static/shared\n"
         sudo mkdir -p /data/web_static/shared
-        echo "path /data/web_static/shared created"
+        printf "path /data/web_static/shared created\n"
 else
-        echo "path /data/web_static/shared already exists"
+        printf "path /data/web_static/shared already exists\n"
 fi
 
 if [[ ! -d "/data/web_static/releases/test" ]]
 then
-        echo "path /data/web_static/releases/ does not exists, creating /data/web_static/releases/test"
+        printf "path /data/web_static/releases/ does not exists, creating /data/web_static/releases/test\n"
         sudo mkdir -p /data/web_static/releases/test
-        echo "path /data/web_static/releases/test created"
+        printf "path /data/web_static/releases/test created\n"
 else
-        echo "path /data/web_static/releases/test already exists"
+        printf "path /data/web_static/releases/test already exists\n"
 fi
 
-echo "creating test file, index.html"
-echo "Hello world" | sudo tee /data/web_static/releases/test/index.html
-echo "created /data/web_static/releases/test/index.html"
+printf "creating test file, index.html\n"
+printf "Hello world" | sudo tee /data/web_static/releases/test/index.html
+printf "created /data/web_static/releases/test/index.html\n"
 
-echo "creating symlink /data/web_static/current"
+printf "creating symlink /data/web_static/current\n"
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
-echo "created symlink /data/web_static/current"
+printf "created symlink /data/web_static/current\n"
 
-echo "changing ownership of /data to ubuntu:ubuntu"
+printf "changing ownership of /data to ubuntu:ubuntu\n"
 sudo chown -R ubuntu:ubuntu /data
 sudo chown -R ubuntu:ubuntu /data/*
-echo "user and group of /data changed to ubuntu:ubuntu"
+printf "user and group of /data changed to ubuntu:ubuntu\n"
 
 sudo sed -i '53i\\tlocation /hbnb_static {\n\t\talias /data/web_static/current;\n\t}' /etc/nginx/sites-available/default
 
