@@ -7,6 +7,7 @@ app = Flask(__name__)
 
 @app.route("/", strict_slashes=False)
 def index():
+    """ Function called with / route """
     return "Hello HBNB!"
 
 
