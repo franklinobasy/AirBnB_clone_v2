@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ A script that starts a flask web application """
 from flask import Flask
-
 app = Flask(__name__)
 
 
@@ -18,8 +17,8 @@ def hbnb():
 
 
 @app.route("/c/<text>", strict_slashes=False)
-def c(text):
-    """ Prints a Message when /c is called """
+def c_is_fun(text):
+    """ Function called with /c/<text> route """
     return f"C {text.replace('_', ' ')}"
 
 
