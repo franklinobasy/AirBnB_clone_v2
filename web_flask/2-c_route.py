@@ -19,7 +19,7 @@ def hbnb():
 
 @app.route("/c/<text>", strict_slashes=False)
 def c(text):
-    """ Function called with /c/<text> route """
+    """ Prints a Message when /c is called """
     return f"C {text.replace('_', ' ')}"
 
 
