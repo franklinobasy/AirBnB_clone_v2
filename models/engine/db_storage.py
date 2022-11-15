@@ -19,7 +19,7 @@ class DBStorage:
     """ creates a db storage engine"""
     __engine = None
     __session = None
-    classes = ["State", "City", "User", "Place", "Review"]
+    classes = ["State", "City", "User", "Place", "Review", "Amenity"]
 
     def __init__(self):
         """ create engine"""
